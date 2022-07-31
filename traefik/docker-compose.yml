@@ -17,6 +17,7 @@ services:
   
 networks:
   proxy:
+    name: proxy_net
     driver: bridge # Use the bridge network driver
     ipam:
       driver: default # Use the default IPAM driver

@@ -4,9 +4,10 @@ services:
   nginx:
     image: nginx:alpine
     labels:
-    - "traefik.http.routers.nginx.rule=Host(`proxy.yubi.com.ar`)"
+      - traefik.http.routers.nginx.rule=Host(`proxy.yubi.com.ar`)
     networks:
     - proxy
 networks:
   proxy:
+    name: proxy_net
     driver: bridge
