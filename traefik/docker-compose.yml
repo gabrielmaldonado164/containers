@@ -21,7 +21,7 @@ services:
       - traefik.http.routers.traefik-secure.middlewares=basicauth
       - traefik.http.routers.traefik-secure.tls=true # Traefik use ssl
       - traefik.http.routers.traefik-secure.tls.certresolver=letsencrypt # Traefik use Let's Encrypt to secure your services(leetsencrypt -> es el nombre que le pusimos en el archivo de config)
-      - traefik.http.routers.traefik-secure.service=api@internal # 
+      - traefik.http.routers.traefik-secure.service=api@internal # Enabling the api to be a service to access
     networks:
       - proxy
   
