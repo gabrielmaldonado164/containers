@@ -5,7 +5,7 @@ services:
     image: nginx:alpine
     labels:
       - traefik.enable=true
-      - traefik.http.services.nginx.loadbalancer.server.port=8080
+      #- traefik.http.services.nginx.loadbalancer.server.port=8080
       - traefik.http.routers.nginx.entrypoints=web
       - traefik.http.routers.nginx.rule=Host(`${FQDN}`) # Your Domain Name goes here for the http rule
       - traefik.http.middlewares.nginx-https-redirect.redirectscheme.scheme=websecure
@@ -20,3 +20,6 @@ networks:
   proxy:
     name: proxy_net
     external: true
+
+
+  
