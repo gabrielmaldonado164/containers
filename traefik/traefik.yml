@@ -1,3 +1,41 @@
+api:
+  dashboard: true
+  insecure: true
+
+entrypoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entrypoints:
+          to: websecure
+          scheme: https
+          permanent: true
+
+  websecure:
+    address: ":443"
+
+
 providers: # indicar provedor que se utiliza 
   docker:
     endpoint: "unix:///var/run/docker.sock" # Docker server endpoint. Can be a tcp or a unix socket endpoint.
+    exposedByDefault: false
+    network: proxy
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: gabriel@yubi.com.ar
+      storage: /acme.json
+      httpChallenge:
+        entryPoint: web
+
+
+log:
+  level: DEBUG
+  filePath: /etc/log/traefik/traefik.log
+
+accessLog:
+  filepath: /etc/log/traefik/accesslog.log
+
+
