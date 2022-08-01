@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   traefik:
@@ -31,3 +31,4 @@ networks:
     driver: bridge # Use the bridge network driver
     ipam:
       driver: default # Use the default IPAM driver
+

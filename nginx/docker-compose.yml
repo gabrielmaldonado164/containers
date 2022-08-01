@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   nginx:
@@ -19,4 +19,4 @@ services:
 networks:
   proxy:
     name: proxy_net
-    driver: bridge
+    external: true
