@@ -5,20 +5,20 @@ services:
     image: nginx:alpine
     labels:
       - traefik.enable=true
-      #- traefik.http.services.nginx.loadbalancer.server.port=8080
+      - traefik.http.services.nginx.loadbalancer.server.port=80
       - traefik.http.routers.nginx.entrypoints=web
-      - traefik.http.routers.nginx.rule=Host(`${FQDN}`) # Your Domain Name goes here for the http rule
+      - traefik.http.routers.nginx.rule=Host(`${HOSTNAME_NGINX}`) # Your Domain Name goes here for the http rule
       - traefik.http.middlewares.nginx-https-redirect.redirectscheme.scheme=websecure
       - traefik.http.routers.nginx.middlewares=nginx-https-redirect #  This is a middleware to redirect to https
-      - traefik.http.routers.nginx-secure.rule=Host(`${FQDN}`) # Your Domain Name for the https rule 
+      - traefik.http.routers.nginx-secure.rule=Host(`${HOSTNAME_NGINX}`) # Your Domain Name for the https rule 
       - traefik.http.routers.nginx-secure.entrypoints=websecure  #  Defining entrypoint for https,
       - traefik.http.routers.nginx-secure.tls=true
       - traefik.http.routers.nginx-secure.tls.certresolver=letsencrypt # Defining certsresolvers for https
     networks:
     - proxy
+    
 networks:
   proxy:
-    name: proxy_net
     external: true
 
 

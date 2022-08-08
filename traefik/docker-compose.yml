@@ -4,6 +4,7 @@ services:
   traefik:
     image: traefik:v2.8.1
     container_name: traefik
+    restart: unless-stopped	
     ports:
       - 80:80 # Traefik HTTP port
       - 8080:8080 # Traefik dashboard port
@@ -18,7 +19,7 @@ services:
       - traefik.enable=true  #Enable traefik to proxy this container
       - traefik.http.middlewares.basicauth.basicauth.usersfile=/users.txt #users and passwords for Traefik admin
       - traefik.http.routers.traefik-secure.entrypoints=websecure #Traefik secure entrypoint
-      - traefik.http.routers.traefik-secure.rule=Host(`${HOSTNAME}`) # Traefik secure rule
+      - traefik.http.routers.traefik-secure.rule=Host(`${HOSTNAME_TRAEFIK}`) # Traefik secure rule
       - traefik.http.routers.traefik-secure.middlewares=basicauth
       - traefik.http.routers.traefik-secure.tls=true # Traefik use ssl
       - traefik.http.routers.traefik-secure.tls.certresolver=letsencrypt # Traefik use Let's Encrypt to secure your services(leetsencrypt -> es el nombre que le pusimos en el archivo de config)
@@ -28,7 +29,7 @@ services:
   
 networks:
   proxy:
-    name: proxy_net
+    external: true
     driver: bridge # Use the bridge network driver
     ipam:
       driver: default # Use the default IPAM driver

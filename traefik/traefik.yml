@@ -1,6 +1,6 @@
 api:
   dashboard: true
-  insecure: true
+  #insecure: true
 
 entryPoints:
   web:
@@ -17,6 +17,7 @@ entryPoints:
 providers: # indicar provedor que se utiliza 
   docker:
     endpoint: "unix:///var/run/docker.sock" # Docker server endpoint. Can be a tcp or a unix socket endpoint.
+    watch: true
     exposedByDefault: false
     network: proxy
 
