@@ -14,7 +14,9 @@ services:
       - ./traefik.yml:/traefik.yml # Traefik configuration file
       - ./acme.json:/acme.json # Traefik lets you use Let's Encrypt to secure your services
       - ./users.txt:/users.txt:ro #Users and passwords for Traefik admin
-      - /etc/log/traefik:/var/log/traefik # Traefik logs
+      - /log/traefik:/var/log/traefik # Traefik logs
+    environment:
+      - HOSTNAME_TRAEFIK
     labels:
       - traefik.enable=true  #Enable traefik to proxy this container
       - traefik.http.middlewares.basicauth.basicauth.usersfile=/users.txt #users and passwords for Traefik admin

@@ -14,7 +14,7 @@ services:
     restart: always
     container_name: nextcloud
     volumes:
-      - ./nextcloud:/var/www/html
+      - nextcloud_data:/var/www/html
     networks:
       - proxy
       - network_app
@@ -22,10 +22,11 @@ services:
     environment:
       - MYSQL_HOST
       - MYSQL_DATABASE
-      - MYSQL_USER=
+      - MYSQL_USER
       - MYSQL_PASSWORD
       - TZ=America/Argentina/Buenos_Aires
       - REDIS_HOST=redis
+      - HOSTNAME_NEXTCLOUD
 
 
     labels:
@@ -42,6 +43,9 @@ services:
     
     depends_on:
       - redis
+
+volumes:
+  nextcloud_data:
 
 networks:
   proxy:
